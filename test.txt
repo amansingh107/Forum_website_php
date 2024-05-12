@@ -1,0 +1,98 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Forum</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <h1>Main Forum</h1>
+    <form method="post">
+        <input type="submit" name="logout" value="Logout">
+    </form>
+    
+    <h2>All Posts</h2>
+    <?php foreach($posts as $post): ?>
+        <div>
+            <h3><?= $post['title'] ?></h3>
+            <p><?= $post['summary'] ?></p>
+            <p>Author: <?= $post['author'] ?></p>
+            <a href="individual_post.php?id=<?= $post['id'] ?>">View Post</a>
+        </div>
+    <?php endforeach; ?>
+</body>
+</html>
+
+
+
+</head>
+<body>
+    <h1>Main Forum</h1>
+    <form method="post">
+        <input type="submit" name="logout" value="Logout">
+    </form>
+    
+    <h2>All Posts</h2>
+    
+        <div>
+            <h3></h3>
+            <p><?= $post['summary'] ?></p>
+            <p></p>
+           
+        </div>
+
+</body>
+
+
+
+  
+  <h2>Comments</h2>
+<?php foreach($comments as $comment): ?>
+    <div>
+        <p><?= $comment['comment'] ?></p>
+        <?php
+        // Fetch username based on user_id
+        $comment_user_id = $comment['user_id'];
+        $sql = "SELECT username FROM users WHERE id = '$comment_user_id'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $comment_username = $row['username'];
+        ?>
+        <p>Comment by: <?= $comment_username ?></p>
+    </div>
+<?php endforeach; ?>
+    <h3>Add a Comment</h3>
+    <form method="post">
+        <textarea name="comment_text" rows="4" cols="50" required></textarea><br>
+        <input type="submit" name="comment" value="Add Comment">
+    </form>
+
+
+
+
+
+ <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+            <div class="d-flex flex-start w-100">
+              <img class="rounded-circle shadow-1-strong me-3"
+                src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40"
+                height="40" />
+              <div data-mdb-input-init class="form-outline w-100">
+                <textarea class="form-control" id="textAreaExample" rows="4"
+                  style="background: #fff;"></textarea>
+                <label class="form-label" for="textAreaExample">Message</label>
+              </div>
+            </div>
+            <div class="float-end mt-2 pt-1">
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-sm">Post comment</button>
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+
+
+        
